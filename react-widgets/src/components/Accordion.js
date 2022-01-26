@@ -10,19 +10,19 @@ const Accordion = ({ items }) => {
    };
 
    // Maps over the items and lists them out on the screen.
-   const mappedItems = items.map((item, index) => {
+   const mappedItems = items.map(({ title, content }, index) => {
       // Used to show the content in the dropdowns.  Returns 'active' if they are the same.
       const active = (index === activeIndex ? 'active' : '');
 
       return (
-         <React.Fragment key={item.title}>
+         <React.Fragment key={title}>
             {/* Using an arrow function here stops it from running as soon as the page loads. */}
             <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
                <i className={`icon angle ${activeIndex === index ? 'down' : 'right'}`}></i>
-               {item.title}
+               {title}
             </div>
             <div className={`content ${active}`} >
-               <p>{item.content}</p>
+               <p>{content}</p>
             </div>
          </React.Fragment>
       );

@@ -1,10 +1,11 @@
 import './css/App.css';
 import React, { useState } from 'react';
+import Route from './components/Route';
+import Header from './components/Header';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
-
 
 // Items object for the accordion.
 const items = [
@@ -48,18 +49,26 @@ const options = [
 
 const App = () => {
    const [selectedColor, setSelectedColor] = useState(options[0]);
-   const [showDropdown, setShowDropdown] = useState(true);
 
    return (
       <div className='wrapper'>
-         {/* <Accordion items={items} /> */}
-         {/* <Search /> */}
-         {/* <Dropdown selected={selectedColor} setSelected={setSelectedColor} options={options} formLabel='Select a color' /> 
-         <h1 style={{ color: selectedColor.value }}>This text is colored: {selectedColor.label}</h1> */}
+         <Header />
 
-         <Translate />
+         <Route path='/'>
+            <Accordion items={items} />
+         </Route>
+         <Route path='/list'>
+            <Search />
+         </Route>
+         <Route path='/dropdown'>
+            <h1 style={{ color: selectedColor.value }}>Dropdown Widget</h1>
+            <Dropdown selected={selectedColor} setSelected={setSelectedColor} options={options} label='Select a color' />
+         </Route>
+         <Route path='/translate'>
+            <Translate />
+         </Route>
       </div>
    );
-}
+};
 
 export default App;

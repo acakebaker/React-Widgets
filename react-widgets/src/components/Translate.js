@@ -46,7 +46,7 @@ const Translate = () => {
                selected={language} 
                setSelected={setLanguage} 
                options={options}
-               formLabel='Select a Language'
+               label='Select a Language'
             />
 
             <div className='ui fluid card'>

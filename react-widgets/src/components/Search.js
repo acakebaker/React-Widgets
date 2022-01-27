@@ -29,7 +29,7 @@ const Search = () => {
 
    // Cleans the results so there are no HTML tags and adds a ... to the end of the string.
    const cleanResults = (string) => {
-      return (string.replace( /(<([^>]+)>)/ig, '')).replace(/&quot;/g, '') + '...';
+      return (string.replace( /(<([^>]+)>)/ig, '')).replace(/&quot;/g, '"') + '...';
    };
 
    // Maps the results and lists them out.

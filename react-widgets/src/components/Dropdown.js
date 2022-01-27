@@ -1,7 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Dropdown = ({ selected, setSelected, options, formLabel }) => {
    const [open, setOpen] = useState(false);
+   const ref = useRef();
+
+   // Allows the dropdown to close if a click happens outside the dropdown form.
+   useEffect(() => {
+      // The function that sets setOpen to false if the reference contains the event.
+      const onBodyClick =  (event) => {
+         if(!ref.current.contains(event.target)) {
+            setOpen(false);
+            console.log('1. ' + ref.current);
+            console.log('2. ' + event.target);
+         }
+      };
+
+      // Adds the event listener.
+      document.body.addEventListener('click', onBodyClick, { capture: true });
+
+      // Removes the event listener.
+      return () => document.body.removeEventListener('click', onBodyClick, { capture: true });
+   }, []);
 
    // Maps over the options.
    const mappedOptions = options.map((option) => {
@@ -9,7 +28,7 @@ const Dropdown = ({ selected, setSelected, options, formLabel }) => {
          <div 
             key={option.value} 
             className='item'
-            style={{ color: option.value, fontWeight: '900' }}
+            style={selected.value == option.value ? { fontWeight: 'bold' } : null}
             onClick={() => setSelected(option)}
          >
             {option.label}
@@ -18,7 +37,7 @@ const Dropdown = ({ selected, setSelected, options, formLabel }) => {
    });
    
    return (
-      <div className='ui form'>
+      <div ref={ref} className='ui form'>
          <div className='field'>
             <label className='label'>{formLabel}</label>
             <div onClick={() => setOpen(!open)} className={`ui selection dropdown ${open ? 'visible active' : ''}`}>

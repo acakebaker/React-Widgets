@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
+import Translate from './components/Translate';
 
 
 // Items object for the accordion.
@@ -21,7 +22,7 @@ const items = [
    }
 ];
 
-// Options object for the dropdown.
+// Holds all the colors for the dropdown.
 const options = [
    {
       label: 'Crunchberry',
@@ -45,25 +46,18 @@ const options = [
    }
 ];
 
-
-
-
 const App = () => {
-   const [selected, setSelected] = useState(options[0]);
+   const [selectedColor, setSelectedColor] = useState(options[0]);
+   const [showDropdown, setShowDropdown] = useState(true);
 
    return (
-      <div>
-         {/* <Accordion 
-            items={items} 
-         /> */}
+      <div className='wrapper'>
+         {/* <Accordion items={items} /> */}
          {/* <Search /> */}
-         <Dropdown 
-            selected={selected} 
-            setSelected={setSelected} 
-            options={options} 
-            formLabel='Select a color'
-         />
-         <h1 style={{ color: selected.value }}>Widgets App!!</h1>
+         {/* <Dropdown selected={selectedColor} setSelected={setSelectedColor} options={options} formLabel='Select a color' /> 
+         <h1 style={{ color: selectedColor.value }}>This text is colored: {selectedColor.label}</h1> */}
+
+         <Translate />
       </div>
    );
 }
